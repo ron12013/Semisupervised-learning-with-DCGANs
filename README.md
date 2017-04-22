@@ -11,6 +11,7 @@
    Code - <a href="https://github.com/jacobgil/keras-dcgan">Keras Implementation of DCGANs</a>
 
 Currently works for Keras with Tensorflow Backend. Will add theano support soon.
+Project report under progress**
 
 ==>Steps involves in the process,<br>
     1. Train the Deep Convolutional Generative Adversarial Networks with the datset in an unsupervised manner. <br>
@@ -43,6 +44,8 @@ The code assumes that the 'train_32x32.mat' and 'test_32x32.mat' files are prese
 Training the model - python svhn_gan.py --mode train --batch_size 128 --epoch_num 100
 
 To generate Images - python svhn_gan.py --mode generate --batch_size 64 --nice
+
+
 
 
 
