@@ -10,7 +10,7 @@
 
    Code - <a href="https://github.com/jacobgil/keras-dcgan">Keras Implementation of DCGANs</a>
 
-Currently works for Keras with Tensorflow Backend. Will add theano support soon.
+Currently works for Keras with Tensorflow Backend. Will add theano support soon. <br>
 Project report under progress**
 
 ==>Steps involves in the process,<br>
