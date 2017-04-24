@@ -9,8 +9,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten, BatchNormalization
 from keras.layers import Convolution2D, MaxPooling2D
 from keras import regularizers
-#from keras.regularizers import
-#from keras.utils import plot_model
+
 
 #hyperparameters of the model
 batch_size = 128
@@ -59,11 +58,9 @@ Y_test = np_utils.to_categorical(Y_test, num_classes)
 
 feature_layers = [
     Convolution2D(64, 5, 5, border_mode='same',subsample=(2, 2), W_regularizer=regularizers.l2(0.01), input_shape=input_shape),
-    #BatchNormalization(),
     Activation('relu'),
     Dropout(0.5),
     Convolution2D(128, 5, 5, border_mode='same', subsample=(2,2), W_regularizer=regularizers.l2(0.01)),
-    #BatchNormalization(),
     Activation('relu'),
     Dropout(0.5),
     Flatten(),

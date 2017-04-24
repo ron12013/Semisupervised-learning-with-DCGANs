@@ -1,7 +1,6 @@
 from __future__ import print_function
 import numpy as np
 import keras
-#from keras.utils import to_categorical
 from keras.utils import np_utils
 from keras.datasets import mnist, cifar10
 from keras.layers.core import Activation
@@ -45,7 +44,7 @@ input_shape = (img_rows, img_cols, 3)
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
 
-#normalizing the data
+#normalizing the data (scaling down)
 X_train /= 255
 X_test /= 255
 
@@ -56,7 +55,6 @@ print(X_test.shape[0], 'test samples')
 #convert class vectors to one hot encoded vectors
 Y_train = np_utils.to_categorical(Y_train, num_classes)
 Y_test = np_utils.to_categorical(Y_test, num_classes)
-
 
 feature_layers = [
     Convolution2D(64, 5, 5, border_mode='same',subsample=(2, 2), input_shape=(32, 32, 3)),
@@ -73,7 +71,6 @@ feature_layers = [
     Dropout(0.5),
     Flatten()
 ]
-
 classification_layers = [
     Dense(512, W_regularizer=keras.regularizers.l2(0.01), name='fc_layer1'),
     Activation('relu'),
@@ -83,38 +80,19 @@ classification_layers = [
 
 model = Sequential(feature_layers + classification_layers)
 # different backend has different image dim order, so we need to judge first.
-'''
-input_shape = (28,28,1)
-model.add(Convolution2D(64, 5, 5, border_mode='same',subsample=(2, 2), input_shape=input_shape))
-#model.add(LeakyReLU(0.02))
-model.add(Activation('tanh'))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Convolution2D(128, 5, 5, border_mode='same', subsample=(2,2)))
-#model.add(LeakyReLU(0.02))
-#model.add(BatchNormalization())
-model.add(Activation('tanh'))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Flatten())
-model.add(Dense(1024))
-#model.add(LeakyReLU(0.02))
-#model.add(BatchNormalization())
-model.add(Activation('tanh'))
-model.add(Dense(num_classes, activation='softmax'))
-#model.add(Dense(1))
-#model.add(Activation('sigmoid'))
-'''
-#print model.summary()
+
 
 model.load_weights('discriminator_cifar', by_name=True)
 
+#this is where the weights are being freezed
 for l in feature_layers:
-    l.trainable = False
+    l.trainable = False 
 
 model.compile(loss='categorical_crossentropy',
               optimizer='Adam',
               metrics=['accuracy'])
 
-print('Model Compilation successful')
+print('Model Compilation Successful!')
 
 
 
